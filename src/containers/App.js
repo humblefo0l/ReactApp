@@ -42,7 +42,8 @@ class App extends Component {
     ],
     otherState: 'some other state',
     showPerson: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
   
   switchNameHandler = (newName) => {
@@ -77,7 +78,12 @@ class App extends Component {
     const person = [...this.state.person];
     person[perIndex] = per;
 
-    this.setState({person: person});
+    this.setState((prevState, props) => {
+      return {
+        person: person,
+        changeCounter: prevState.changeCounter + 1
+      }
+    });
   }
 
   togglePersonsHandler = () => {
@@ -115,3 +121,4 @@ class App extends Component {
 }
 
 export default withClass(App, classes.App);
+ 
